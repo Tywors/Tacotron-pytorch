@@ -30,9 +30,10 @@ def preprocess(args):
     text = []
     wav = []
     futures = []
-    with open(args.old_meta, encoding='utf-8') as f:
+    with open(args.old_meta, encoding='utf-8-sig') as f:
         for line in f:
             parts = line.strip().split('|')
+
             fpath = os.path.join(args.data_dir, '%s.wav' % parts[0])
             text = parts[2]
             job = executor.submit(partial(process_utterance, fpath, text, args.output_dir, AP))
